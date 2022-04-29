@@ -1,0 +1,58 @@
+<div class="card">
+  <div class="card-header">
+
+    <div class="row justify-content-between">
+      <div class="col-auto">
+        <h5>Lista de Produtos</h5>
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-success"
+          routerLink="novo">
+          Novo
+        </button>
+      </div>
+    </div>
+
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <tr>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Ações</th>
+      </tr>
+      <tr *ngFor="let produto of produtos; let i = index">
+        <td>{{ produto.nome }}</td>
+        <td>{{ produto.preco | currency: "BRL" }}</td>
+        <td>
+          <button
+            [routerLink]="[i]"
+            class="btn btn-primary mr-1">
+            Editar
+          </button>
+
+          <button
+            (click)="abrirModalExc(modalExc, i)"
+            class="btn btn-danger ml-1"
+          >
+            Excluír
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <ng-template #modalExc>
+    <div class="modal-header">Excluír produto</div>
+    <div class="modal-body">Tem certeza disso?</div>
+    <!--.modal-footer-->
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="fecharModalExc(false)">
+        Não
+      </button>
+      <button class="btn btn-primary" (click)="fecharModalExc(true)">
+        Sim
+      </button>
+    </div>
+  </ng-template>
+</div>
